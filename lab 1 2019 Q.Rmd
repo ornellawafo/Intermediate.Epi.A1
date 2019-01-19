@@ -139,14 +139,59 @@ A scatter plot is a useful way to visualize the relationship between two continu
 <div id="exercise">
 **Exercise R cade**:      
 
-* Create a scatter plot using `ggplot2` to represent life expectancy of males (on the x-axis) against females (on the y-axis) (4 points)     
-* As it is possible that observations may have the same data, it may be helpful to slightly "jitter" the data to see all the data points. Print a "jittered" graph (2 points)     
-* Plot the 45 degree line to enable a quick comparison between x and y values. What do you observe? (4 points)
-</div>
+* Create a scatter plot using `ggplot2` to represent life expectancy of males (on the x-axis) against females (on the y-axis) (4 points)  
 ```{r}
-# enter your code here
+# scatterplot of subdata for all year ranges
+subdata_plot1 <- ggplot(subdata, aes(x=Male, y=Female)) + 
+                 geom_point() + 
+                 #xlim(0, 85) + ylim(0, 85) +
+                 ggtitle("Life Expectancy of Females vs. Males for Year 1985-2005")
+subdata_plot1
 
+# scatterplot of subdata for year 2000 -2005
+subdata.2000.2005_plot1 <- ggplot(subdata.2000.2005, aes(x=Male, y=Female)) + 
+                           geom_point() + 
+                           #xlim(0, 85) + ylim(0, 85) +
+                           ggtitle("Life Expectancy of Females vs. Males for Year 2000-2005")
+subdata.2000.2005_plot1
 ```
+
+* As it is possible that observations may have the same data, it may be helpful to slightly "jitter" the data to see all the data points. Print a "jittered" graph (2 points)     
+```{r}
+# jittered scatterplot of subdata for all year ranges
+subdata_plot2 <- ggplot(subdata, aes(x=Male, y=Female)) + 
+                 geom_jitter() + 
+                 xlim(0, 85) + ylim(0, 85) +
+                 ggtitle("Life Expectancy of Females vs. Males for Year 1985-2005")
+subdata_plot2
+
+# jittered scatterplot of subdata for year 2000 -2005
+subdata.2000.2005_plot2 <- ggplot(subdata.2000.2005, aes(x=Male, y=Female)) + 
+                           geom_jitter() + 
+                           xlim(0, 85) + ylim(0, 85) +
+                           ggtitle("Life Expectancy of Females vs. Males for Year 2000-2005")
+subdata.2000.2005_plot2
+```
+
+* Plot the 45 degree line to enable a quick comparison between x and y values. What do you observe? (4 points)
+```{r}
+# scatterplot of subdata for all year ranges with 45 degree line
+subdata_plot3 <- ggplot(subdata, aes(x=Male, y=Female)) + 
+                 geom_jitter() + 
+                 geom_abline(slope = 1, col = "red") +
+                 xlim(0, 85) + ylim(0, 85) +
+                 ggtitle("Life Expectancy of Females vs. Males for Year 1985-2005")
+subdata_plot3 
+
+# scatterplot of subdata for year 2000 -2005 with 45 degree line
+subdata.2000.2005_plot3 <- ggplot(subdata.2000.2005, aes(x=Male, y=Female)) +
+                           geom_jitter() +
+                           geom_abline(slope = 1, col = "red") +
+                           xlim(0, 85) + ylim(0, 85) +
+                           ggtitle("Life Expectancy of Females vs. Males for Year 2000-2005")
+subdata.2000.2005_plot3  
+```
+
 <div id="body">
 **Type your answer here:** What do you observe?            
 
