@@ -263,17 +263,20 @@ animated.plotly <- subdata.2000.2005 %>%
   plot_ly(
     x = ~Male,
     y = ~Female ,
-    #ids= ~Country.or.Area,
+    ids= ~Country.or.Area,
     frame = ~factor(Country.or.Area, levels=Country.or.Area),
     type = 'scatter' ,
     mode = 'markers',
-    showlegend = F, size=10, text = ~Country.or.Area, hoverinfo="text", name= ~Country.or.Area)%>%
-  animation_slider(currentvalue= list(prefix = "Country: ", font = list(color = "red"))) %>%
+    showlegend = F, size=10, text = ~Country.or.Area, hoverinfo="text")%>%
+  animation_slider(currentvalue= list(prefix = " Country: ", font = list(color = "red"))) %>%
   layout(
     title = "AAPL: Last 30 days",
     xaxis = list(
-      title = "Country"
-    ))
+      title = "Life Expectancy in Males(2000-2005)"),
+    yaxis = list(
+      title = "Life Expectancy in Females(2000-2005)"
+    ))%>%
+  animation_opts(frame=4000)
 ```
 
 ## Question 6 - 15 points
