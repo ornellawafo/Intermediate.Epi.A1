@@ -80,6 +80,7 @@ Data manipulation, aka data wrangling or munging, is often an important step to 
 * Reduce the  dataset to the `Country.or.Area`, `Subgroup` and `Value` variables using only the data from "2000-2005". (3 points)     
 
 ```{r}
+#Reduced the original set to a new dataframe containing `Country.or.Area`, `Subgroup` and `Value` columns , and year range "2000-2005"
 reduced.life_expectancy.2000.2005 <- life_expectancy %>% filter(Year=="2000-2005") %>% select(-c(Source, Year, Unit)) 
 head(reduced.life_expectancy.2000.2005)
 ```
