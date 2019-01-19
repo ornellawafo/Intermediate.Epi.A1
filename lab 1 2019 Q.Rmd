@@ -44,6 +44,8 @@ Life expectancy at birth is a measure of the average a living being is expected 
 # enter your code here
 library(dplyr); library(tidyr); library(ggplot2)
 
+UNdata <- read.csv("https://raw.githubusercontent.com/ornellawafo/Intermediate.Epi.A1/master/UNdata_Export_20190119_163231203.csv?token=AsrPi-SOvSvWYdL-e6S63U1z6hc93o5Cks5cQ0j-wA%3D%3D", sep = ",", header = T)
+head(UNdata)
 
 ```
 <div id="body">
