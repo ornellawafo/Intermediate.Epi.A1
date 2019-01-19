@@ -1,0 +1,179 @@
+---
+title: "Lab  1 2019 Q"
+author: "J Brophy"
+date: "Winter 2019"
+output:
+  html_document:
+    css: lab.css
+    highlight: tango
+    theme: cerulean
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<div id="instructions">
+Complete this exercise, and submit answers using R Markdown in RStudio Oopen the document using RStudio, then **save as XXXXXXXXX.Rmd where XXXXXXXXX is your McGill student ID. Then when you knit the file it will create a html file called XXXXXXXXX.html**. You can then zip this file and submit it. Alternatively you can knit the file into a word or pdf document and submit those. The zip file approach is best for maintianing all the formating. Unfortuantely, as discussed in the announcements MyCourses won't accept a html file without altering its formating. Enter your answers in the appropriate R code chunks or text answers in the box following the **Type your answer here:**.   
+
+Grading is based on the points allocated for each question and an extra 5 points for overall style, organization, and clarity. Marks per question are indicated in each question. 
+
+</div>
+
+## Questions 1 - 10 points
+
+This assignment will introduce elements of data manipulation and graphical exploration using the most popular `R` packages. In particular, for data manipulation `dplyr`, `magrittr` are exceedingly useful. These packages including others, notably `ggplot2` are referred to as the tidyverse and can be downloaded collectively with `library(tidyverse)`.    
+This assignment will use United Nations life expectancy data, found [here](http://data.un.org/Data.aspx?d=GenderStat&f=inID:37&c=1,2,3,4,5,6&s=crEngName:asc,sgvEngName:asc,timeEngName:desc&v=1) and also available on mycourses (`UNdata_Exp.csv`). I suggest to always place downloaded data into a sub folder of your working directory called `data`. The variables in this dataset are obvious from the headings and include life expectancy for males and females according to country.                  
+Life expectancy at birth is a measure of the average a living being is expected to live. It takes into account several demographic factors like gender, country, or year of birth and can vary along time or between countries because of many causes: the evolution of medicine, the degree of development of countries, or the effect of armed conflicts. 
+
+<div id="exercise">
+**Exercise R code**:  
+* Load the following packages `dplyr`, `tidyr`, and `ggplot2`. (2 points)             
+* Load the data onto your computer and read it into `R` saving as a data frame called `life_expectancy` (4 points)     
+* How many observations (rows) and how many variables columns) are there?  (2 points)  
+* Print the first 3 rows.  (2 points)   
+
+</div>
+
+```{r}
+# enter your code here
+library(dplyr); library(tidyr); library(ggplot2)
+
+
+```
+<div id="body">
+**Type your answer here:** How many observations (rows) and how many variables columns) are there?     
+
+</div>
+
+## Question 2 - 10 points
+
+Data manipulation, aka data wrangling or munging, is often an important step to cleaning and organoizing the data. Data manipulation can make data exploration easier. The `dplyr` package contains handy functions to manipulate data; `filter`, `select`, `mutate` or `arrange`. On the other hand, the `tidyr` package is useful to reshape data; that is: to change its format from wide to long (and vice versa).
+
+<div id="exercise">
+**Exercise R code**:        
+
+* Reduce the  dataset to the `Country.or.Area`, `Subgroup` and `Value` variables using only the data from "2000-2005". (3 points)     
+* Reshape the data to a wide format where each observation includes 3 columns; one for `Country.or.Area` one called `Males` and one called `Females` with life expectancies in these 2 columns and store these changes in a dataset called `subdata`. (2 points)         
+* Display the rows 1, 3, and 6.  (1 point)        
+* As there are always several ways of accomplishing the same task in `R`, write at least 2 commands to determine how many observations are in the `sudbata` file. (4 points)
+</div>
+
+```{r}
+# enter your code here
+
+```
+<div id="body"> 
+**Type your answer here:** How many observations are in the `sudbata` file?    
+
+</div>
+
+## Questions 3 - 10 points
+A scatter plot is a useful way to visualize the relationship between two continuous variables. It is a simple plot in which points are arranged on two axes, each of which represents one of those variables. Base `R` has some good graphics but `ggplot2` package extends graphical capabilities using the "grammer of graphics" approach. Many times you can find soultions to your graphing needs by searching the web (for example [here](https://ggplot2.tidyverse.org)).
+
+<div id="exercise">
+**Exercise R cade**:      
+
+* Create a scatter plot using `ggplot2` to represent life expectancy of males (on the x-axis) against females (on the y-axis) (4 points)     
+* As it is possible that observations may have the same data, it may be helpful to slightly "jitter" the data to see all the data points. Print a "jittered" graph (2 points)     
+* Plot the 45 degree line to enable a quick comparison between x and y values. What do you observe? (4 points)
+</div>
+```{r}
+# enter your code here
+
+```
+<div id="body">
+**Type your answer here:** What do you observe?            
+
+</div>
+
+## Question 4 - 9 points
+In this exercise, we will identify the countries where the gap in life expectancy between men and women is highest and lowest. 
+<div id="exercise">
+**Exercise FR code**:         
+      
+* Print the 3 largest female - male differences (3 points)     
+* Print the 3 smallest female - male differences  (3 points)     
+* What are the 3 countries with the smallest /largest  female / male differences? (3 points) 
+</div>
+
+```{r}
+# enter your code here
+
+```
+<div id="body">
+**Type your answer here:** What are the 3 countries with the smallest /largest  female / male differences?    
+ 
+</div>
+
+## Questions 5 - 10 points
+In this exercise we will improve the visual presentation of the graph.  (Do not use the jitter function)      
+<div id="exercise">
+**Exercise R code**: 
+
+* Extend the x and y axes from 35 to 85   (2 points)      
+* Add a title `Life Expectancy at Birth by Country`, a subtitle `Years. Period: 2000-2005. Average` and a caption `Source: United Nations Statistics Division`  (2 points)     
+* Change the color of the points to `lightblue` (2 points) (hint: include the argument "shape=21")    
+* On the graph add the text names corresponding to  the `top_male` and `top_female` points  (4 points)
+
+</div>
+
+```{r}
+# enter your code here
+
+```
+
+## Question 6 - 15 points
+Since the original data contained historical information, we can investigate the difference between men and women across countries between two periods comaring life expectancy from these 2 periods 2000-2005 and 1985-1990.
+
+<div id="exercise">
+**Exercise R code**:       
+
+* Create a new dataset `subdata2` (filter the right years, remove the `Source`, `Unit` and `Value.Footnotes` variables) (2 points)    
+* Use the following code ` mutate(Sub_Year=paste(Subgroup, Year, sep="_")) %>% 
+  mutate(Sub_Year=gsub("-", "_", Sub_Year)) ` to create a new variable `Sub_Year`, which is a character variable of sex and year. (this is a bit complicated as you must replace the `-` with `_`)    (3 points)    
+* Remove the `Subgroup` and `year` variables     (2 points)     
+* Change this to a wide format (hint: use `spread`)  (3 points)     
+* Create 2 new variables `diff_Female` and `diff_Male` that are the differences between life expectancies for the period 2000-2005 and 1985-1990   (3 points)    
+* Print the first 6 rows of the `subdata2`(2 points)
+
+</div>
+
+```{r}
+# enter your code here
+
+```
+
+
+## Questions 7 - 8 points
+After all the hard work of wrangling the data, we can easily plot the data (use the same formatting as previously)   
+<div id="exercise">
+**Exercise R code**:  
+
+* Plot the average life expectancy differences between "1985-1990" and "2000-2005" for men (x axis) and women (3 points)    
+* Again use the 45 degree line to help interpretation and change the subtitle to "Difference between 1985-1990 and 2000-2005. Average"    (2 points)
+* Add a *dashed* vertical and horizontal lines to go through (0,0) to further help quick interpretations (3 points)
+</div>
+
+```{r message= FALSE}
+# enter your code here
+
+```
+
+## Question 8 - 8 points
+
+<div id="exercise">
+**Exercise**: 
+* Identify the 3 countries that had the best and worst improvements.(4 points)        
+* Use `geom_text` to indicate these countries on the graph (use graph from question 7) (4 points)
+</div>
+
+```{r }
+# enter your code here
+
+```
+
+<div id="body">
+**Type your answer here:** Identify the 3 countries that had the best and worst improvements.  
+</div>
