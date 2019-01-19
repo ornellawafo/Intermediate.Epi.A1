@@ -14,6 +14,10 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+```{r}
+UNdata_Exp.csv <- read.csv("UNdata_Export_20190119_163231203.csv", sep=",", header=T)
+```
 <div id="instructions">
 Complete this exercise, and submit answers using R Markdown in RStudio Oopen the document using RStudio, then **save as XXXXXXXXX.Rmd where XXXXXXXXX is your McGill student ID. Then when you knit the file it will create a html file called XXXXXXXXX.html**. You can then zip this file and submit it. Alternatively you can knit the file into a word or pdf document and submit those. The zip file approach is best for maintianing all the formating. Unfortuantely, as discussed in the announcements MyCourses won't accept a html file without altering its formating. Enter your answers in the appropriate R code chunks or text answers in the box following the **Type your answer here:**.   
 
