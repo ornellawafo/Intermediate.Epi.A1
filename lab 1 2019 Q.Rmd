@@ -127,7 +127,9 @@ nrow(subdata.2000.2005)
 
 ```
 <div id="body"> 
-**Type your answer here:** How many observations are in the `sudbata` file?    
+**Type your answer here:** How many observations are in the `sudbata` file?  
+  
+* There are 195 observations in the subdata file, when using the reduced data that only displays values for years 2000-2005.
 
 </div>
 
