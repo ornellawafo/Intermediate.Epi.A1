@@ -78,9 +78,47 @@ Data manipulation, aka data wrangling or munging, is often an important step to 
 **Exercise R code**:        
 
 * Reduce the  dataset to the `Country.or.Area`, `Subgroup` and `Value` variables using only the data from "2000-2005". (3 points)     
-* Reshape the data to a wide format where each observation includes 3 columns; one for `Country.or.Area` one called `Males` and one called `Females` with life expectancies in these 2 columns and store these changes in a dataset called `subdata`. (2 points)         
-* Display the rows 1, 3, and 6.  (1 point)        
+
+```{r}
+reduced.life_expectancy.2000.2005 <- life_expectancy %>% filter(Year=="2000-2005") %>% select(-c(Source, Year, Unit)) 
+head(reduced.life_expectancy.2000.2005)
+```
+* Reshape the data to a wide format where each observation includes 3 columns; one for `Country.or.Area` one called `Males` and one called `Females` with life expectancies in these 2 columns and store these changes in a dataset called `subdata`. (2 points)     
+
+``` {r}
+#Reduced dataset with `Country.or.Area`, `Subgroup` and `Value` columns and all years 
+reduced.life_expectancy <- life_expectancy  %>% select(-c(Source, Unit)) 
+head(reduced.life_expectancy )
+
+#Subdata for reduced life expectancy dataset for all year ranges
+subdata <- reduced.life_expectancy %>% spread(Subgroup, Value)
+head(subdata)
+
+#Subdata for reduced life expectancy dataset for year 2000 -2005
+subdata.2000.2005 <- reduced.life_expectancy.2000.2005 %>% spread( Subgroup, Value)
+head(subdata.2000.2005)
+```
+* Display the rows 1, 3, and 6.  (1 point) 
+
+```{r}
+#Subdata for reduced life expectancy dataset for all year ranges
+subdata[c(1,3,6),]
+
+#Subdata for reduced life expectancy dataset for year 2000 -2005
+subdata.2000.2005[c(1,3,6),]
+```
 * As there are always several ways of accomplishing the same task in `R`, write at least 2 commands to determine how many observations are in the `sudbata` file. (4 points)
+
+```{r}
+
+#Subdata for reduced life expectancy dataset for all year ranges
+str(subdata) 
+nrow(subdata)
+
+#Subdata for reduced life expectancy dataset for year 2000 -2005
+str(subdata.2000.2005) 
+nrow(subdata.2000.2005)
+```
 </div>
 
 ```{r}
@@ -116,9 +154,25 @@ In this exercise, we will identify the countries where the gap in life expectanc
 <div id="exercise">
 **Exercise FR code**:         
       
-* Print the 3 largest female - male differences (3 points)     
-* Print the 3 smallest female - male differences  (3 points)     
+* Print the 3 largest female - male differences (3 points) 
+
+```{r}
+male.female.gap.2000.2005 <- subdata.2000.2005 %>% mutate(male.female.LE.gap= Female-Male) %>% arrange(desc(male.female.LE.gap))
+male.female.gap.2000.2005[1:3,]
+```
+* Print the 3 smallest female - male differences  (3 points)    
+```{r}
+male.female.gap.2000.2005[193:195, ]
+```
 * What are the 3 countries with the smallest /largest  female / male differences? (3 points) 
+
+```{r}
+#Three countries with the smallest female-male life expectancy difference
+smallest.gap.2000.2005 <- male.female.gap.2000.2005[193:195, ] %>% select(Country.or.Area)
+
+#Three countries with the largest female-male life expectancy difference
+largest.gap.2000.2005 <- male.female.gap.2000.2005[1:3,] %>% select(Country.or.Area)
+```
 </div>
 
 ```{r}
@@ -126,8 +180,11 @@ In this exercise, we will identify the countries where the gap in life expectanc
 
 ```
 <div id="body">
-**Type your answer here:** What are the 3 countries with the smallest /largest  female / male differences?    
+**Type your answer here:** What are the 3 countries with the smallest /largest  female / male differences?
+  
+  * The countries with the largest female/male life expectancy difference are the Russian Federation, Belarus and Estonia in descending order, with the Russian Federation having the largest gap (14 years).
  
+ * The countries with the smallest female/male life expectancy difference are Zambia, Zimbabwe and Niger in descending order, with Niger having the smallest gap (-1 years).
 </div>
 
 ## Questions 5 - 10 points
