@@ -41,16 +41,32 @@ Life expectancy at birth is a measure of the average a living being is expected 
 </div>
 
 ```{r}
-# enter your code here
+# load packages dplyr, tidyr, and ggplot2
 library(dplyr); library(tidyr); library(ggplot2)
 
-life_expectancy <- read.csv("https://raw.githubusercontent.com/ornellawafo/Intermediate.Epi.A1/master/UNdata_Export_20190119_163231203.csv?token=AsrPi-SOvSvWYdL-e6S63U1z6hc93o5Cks5cQ0j-wA%3D%3D", sep = ",", header = T)
-head(UNdata)
-life_expectancy <- life_expectancy[-c(1561:1571),]
-life_expectancy <- life_expectancy %>% select(-Value.Footnotes)
+# load dataset
+life_expectancy_pre1 <- read.csv("https://raw.githubusercontent.com/ornellawafo/Intermediate.Epi.A1/master/UNdata_Export_20190119_163231203.csv", sep = ",", header = T)
+head(life_expectancy_pre1)
+
+# examine number of observations and variables in pre data frame
+dim(life_expectancy_pre1)
+
+# delete rows and column containing footnotes
+life_expectancy_pre2 <- life_expectancy_pre1[-c(1561:1571),]
+life_expectancy <- life_expectancy_pre2 %>% select(-Value.Footnotes)
+
+# examine number of observations and variables in main data frame
+dim(life_expectancy)
+
+# print the first 3 rows
+life_expectancy[1:3,]
+
 ```
 <div id="body">
 **Type your answer here:** How many observations (rows) and how many variables columns) are there?     
+
+When we downloaded United Nations life expectancy at birth data and loaded it,the data frame had 1571 observations and 7 variables. Upon examining the data frame, we saw that several rows at the bottom and a column contain information about the footnotes. After deleting them from the data frame, there are 1560 observations and 6 variables. 
+
 
 </div>
 
