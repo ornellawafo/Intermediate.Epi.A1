@@ -248,8 +248,32 @@ In this exercise we will improve the visual presentation of the graph.  (Do not 
 </div>
 
 ```{r}
-# enter your code here
+#Animated plot using GGAnimate
+library(gganimate)
+ggplot(subdata.2000.2005, aes(x=Male, y=Female)) + 
+                           geom_jitter() + 
+                           xlim(0, 85) + ylim(0, 85) +
+                           ggtitle("Life Expectancy of Females vs. Males for Year 2000-2005")+ transition_states(factor(Country.or.Area))+  labs(title = "{closest_state}") 
 
+
+#animated plot using Plotly
+library(plotly)
+
+animated.plotly <- subdata.2000.2005 %>%
+  plot_ly(
+    x = ~Male,
+    y = ~Female ,
+    #ids= ~Country.or.Area,
+    frame = ~factor(Country.or.Area, levels=Country.or.Area),
+    type = 'scatter' ,
+    mode = 'markers',
+    showlegend = F, size=10, text = ~Country.or.Area, hoverinfo="text", name= ~Country.or.Area)%>%
+  animation_slider(currentvalue= list(prefix = "Country: ", font = list(color = "red"))) %>%
+  layout(
+    title = "AAPL: Last 30 days",
+    xaxis = list(
+      title = "Country"
+    ))
 ```
 
 ## Question 6 - 15 points
@@ -323,15 +347,39 @@ After all the hard work of wrangling the data, we can easily plot the data (use 
 </div>
 
 ```{r message= FALSE}
-# enter your code here
 
+#Plotting the Data using geom_point
+
+ggplot(spread.reduced.subdata2.mutated, aes(x=diff_Male ,y=diff_Female)) +
+  geom_point() + geom_abline(slope=1, col = "red") + 
+  labs(title = "Differences in Life Expectancy at Birth between Males and Females by Country",subtitle = "Difference between 1985-1990 and 2000-2005. Average", x = "Difference in Males", y="Difference in Females")+
+  scale_x_continuous(limits = c(-25, max(spread.reduced.subdata2.mutated$diff_Male)), breaks = seq(min(spread.reduced.subdata2.mutated$diff_Male), max(spread.reduced.subdata2.mutated$diff_Male)+1, 4))+
+  scale_y_continuous(limits = c(-25, max(spread.reduced.subdata2.mutated$diff_Female)), breaks = seq(min(spread.reduced.subdata2.mutated$diff_Female), max(spread.reduced.subdata2.mutated$diff_Female)+1, 4)) +
+  geom_vline(xintercept = 0, linetype="dashed")+
+    geom_hline(yintercept = 0, linetype="dashed")
+
+#Plotting the Data using geom_jitter
+
+ggplot(spread.reduced.subdata2.mutated, aes(x=diff_Male ,y=diff_Female)) +
+  geom_jitter(aes(col=)) + geom_abline(slope=1, col = "red") + 
+  labs(title = "Differences in Life Expectancy at Birth between Males and Females by Country",subtitle = "Difference between 1985-1990 and 2000-2005. Average", x = "Difference in Males", y="Difference in Females")+
+  scale_x_continuous(limits = c(-25, max(spread.reduced.subdata2.mutated$diff_Male)), breaks = seq(min(spread.reduced.subdata2.mutated$diff_Male), max(spread.reduced.subdata2.mutated$diff_Male)+1, 4))+
+  scale_y_continuous(limits = c(-25, max(spread.reduced.subdata2.mutated$diff_Female)), breaks = seq(min(spread.reduced.subdata2.mutated$diff_Female), max(spread.reduced.subdata2.mutated$diff_Female)+1, 4)) +
+  geom_vline(xintercept = 0, linetype="dashed")+
+    geom_hline(yintercept = 0, linetype="dashed")
+  
 ```
-
 ## Question 8 - 8 points
 
 <div id="exercise">
 **Exercise**: 
-* Identify the 3 countries that had the best and worst improvements.(4 points)        
+* Identify the 3 countries that had the best and worst improvements.(4 points)  
+  
+  ```{r}
+spread.reduced.subdata2.mutated %>% mutate(sum.of.M.Fdifference =diff_Female+diff_Male) %>% arrange(desc(sum.of.M.Fdifference ))
+ ```
+ 
+ The 
 * Use `geom_text` to indicate these countries on the graph (use graph from question 7) (4 points)
 </div>
 
