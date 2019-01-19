@@ -214,12 +214,50 @@ Since the original data contained historical information, we can investigate the
 **Exercise R code**:       
 
 * Create a new dataset `subdata2` (filter the right years, remove the `Source`, `Unit` and `Value.Footnotes` variables) (2 points)    
-* Use the following code ` mutate(Sub_Year=paste(Subgroup, Year, sep="_")) %>% 
-  mutate(Sub_Year=gsub("-", "_", Sub_Year)) ` to create a new variable `Sub_Year`, which is a character variable of sex and year. (this is a bit complicated as you must replace the `-` with `_`)    (3 points)    
+```{r}
+#Creating a new dataset `subdata2` with the requested years ("1985-1990", "2000-2005") and removing the `Source`, `Unit` and `Value.Footnotes` variables
+subdata2 <- life_expectancy %>% filter(Year %in% c("1985-1990", "2000-2005")) %>% select(-c(Source, Unit)) 
+head(subdata2 )
+```
+
+* Use the following code *mutate(Sub_Year=paste(Subgroup, Year, sep="_")) %>% 
+  mutate(Sub_Year=gsub("-", "_", Sub_Year))* to create a new variable "Sub_Year", which is a character variable of sex and year. (this is a bit complicated as you must replace the `-` with `_`)    (3 points)  
+  
+```{r}
+subdata2.mutated <- subdata2 %>% mutate(Sub_Year=paste(Subgroup, Year, sep="_")) %>% 
+  mutate(Sub_Year=gsub(pattern="-", replacement="_", x=Sub_Year))
+
+head(subdata2.mutated)
+```
+
 * Remove the `Subgroup` and `year` variables     (2 points)     
-* Change this to a wide format (hint: use `spread`)  (3 points)     
+```{r}
+#Remove the `Subgroup` and `year` variables from the mutated subdata2 that contains "Sub_Year" a character variable of sex and year
+reduced.subdata2.mutated <- subdata2.mutated %>% select(-c(Subgroup, Year))
+head(reduced.subdata2.mutated)
+```
+
+* Change this to a wide format (hint: use `spread`)  (3 points)  
+```{r}
+spread.reduced.subdata2.mutated <- reduced.subdata2.mutated %>% spread(Sub_Year, Value)
+head(spread.reduced.subdata2.mutated)
+```
+
 * Create 2 new variables `diff_Female` and `diff_Male` that are the differences between life expectancies for the period 2000-2005 and 1985-1990   (3 points)    
+```{r}
+#Adding a new column/variable to subdata2 called "diff_Female" which represents the differences between life expectancies for the period 2000-2005 and 1985-1990
+spread.reduced.subdata2.mutated$diff_Female <- spread.reduced.subdata2.mutated $Female_2000_2005 - spread.reduced.subdata2.mutated $Female_1985_1990
+
+#Adding a new column/variable to subdata2 called "diff_Male" which represents the differences between life expectancies for the period 2000-2005 and 1985-1990
+spread.reduced.subdata2.mutated$diff_Male <- spread.reduced.subdata2.mutated $Male_2000_2005 - spread.reduced.subdata2.mutated $Male_1985_1990
+
+```
+
 * Print the first 6 rows of the `subdata2`(2 points)
+```{r}
+#Printing the first 6 rows of the subdata2 with all the modifications requested above i.e. spreading the data, removing "Subgroup" and "Year" columns and adding the 2 new variables`diff_Female` and `diff_Male`
+head(spread.reduced.subdata2.mutated)
+```
 
 </div>
 
