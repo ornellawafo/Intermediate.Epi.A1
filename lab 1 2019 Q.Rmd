@@ -387,7 +387,7 @@ spread.reduced.subdata2.mutated %>% mutate(sum.of.M.Fdifference =diff_Female+dif
 </div>
 
 ```{r }
-jitter.subdata2 + geom_text( data = subset(subdata2.sum.of.M.Fdifference,Country.or.Area == c("Timor Leste", "Bhutan" , "Egypt")), aes(x=diff_Male ,y=diff_Female,label = Country.or.Area), col= "darkgreen")+
+scatter.subdata2  + geom_text( data = subset(subdata2.sum.of.M.Fdifference,Country.or.Area == c("Timor Leste", "Bhutan" , "Egypt")), aes(x=diff_Male ,y=diff_Female,label = Country.or.Area), col= "darkgreen")+
   geom_text( data = subset(subdata2.sum.of.M.Fdifference, Country.or.Area == c("Swaziland", "Botswana", "Zimbabwe")), aes(x=diff_Male ,y=diff_Female,label = Country.or.Area), col="blue")
  
 ```
