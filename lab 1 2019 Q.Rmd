@@ -47,6 +47,7 @@ library(dplyr); library(tidyr); library(ggplot2)
 life_expectancy <- read.csv("https://raw.githubusercontent.com/ornellawafo/Intermediate.Epi.A1/master/UNdata_Export_20190119_163231203.csv?token=AsrPi-SOvSvWYdL-e6S63U1z6hc93o5Cks5cQ0j-wA%3D%3D", sep = ",", header = T)
 head(UNdata)
 life_expectancy <- life_expectancy[-c(1561:1571),]
+life_expectancy <- life_expectancy %>% select(-Value.Footnotes)
 ```
 <div id="body">
 **Type your answer here:** How many observations (rows) and how many variables columns) are there?     
